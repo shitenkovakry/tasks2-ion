@@ -15,7 +15,7 @@ func Test_Case1(t *testing.T) {
 
 	expected := []int{1, 2, 3}
 
-	actual := FindElementsWhichareAtTheTopOfTheMatrix(array)
+	actual := FindElementsWhichAreAtTheTopOfTheMatrix(array)
 
 	assert.Equal(t, expected, actual)
 }
