@@ -1,6 +1,6 @@
 package main
 
-func FindElementsWhichareAtTheTopOfTheMatrix(array [][]int) []int {
+func FindElementsWhichAreAtTheTopOfTheMatrix(array [][]int) []int {
 	arrayWithResult := []int{}
 	lenOfArray := len(array)
 
