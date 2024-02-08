@@ -7,41 +7,13 @@ func FindElementsWhichAreInTheMiddleSideOfTheMatrix(array [][]int) [][]int {
 	if lenOfArray%2 == 0 {
 		indexOfDivision := lenOfArray / 2
 
-		for indexI := indexOfDivision; indexI < lenOfArray; indexI-- {
-			if len(arrayWithResult) == 2 {
-				break
-			}
-
-			row := array[indexI]
-			resultRow := []int{}
-
-			for indexJ := 0; indexJ < len(row); indexJ++ {
-				resultRow = append(resultRow, row[indexJ])
-
-			}
-
-			arrayWithResult = append(arrayWithResult, resultRow)
-		}
-
+		arrayWithResult = append(arrayWithResult, array[indexOfDivision-1])
+		arrayWithResult = append(arrayWithResult, array[indexOfDivision])
 	} else {
 		indexOfDivisionForOdd := lenOfArray / 2
 
-		for indexI := indexOfDivisionForOdd; indexI < lenOfArray; indexI-- {
-			if len(arrayWithResult) == 1 {
-				arrayWithResult = append(arrayWithResult, []int{})
-				break
-			}
-
-			row := array[indexI]
-			resultRow := []int{}
-
-			for indexJ := 0; indexJ < len(row); indexJ++ {
-				resultRow = append(resultRow, row[indexJ])
-
-			}
-
-			arrayWithResult = append(arrayWithResult, resultRow)
-		}
+		arrayWithResult = append(arrayWithResult, array[indexOfDivisionForOdd])
+		arrayWithResult = append(arrayWithResult, []int{})
 	}
 
 	return arrayWithResult
