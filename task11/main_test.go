@@ -32,8 +32,8 @@ func Test_Case2(t *testing.T) {
 	}
 
 	expected := [][]int{
-		{3, 7, 12, 16},
 		{2, 6, 11, 15},
+		{3, 7, 12, 16},
 	}
 
 	actual := FindElementsWhichAreInTheMiddleSideOfTheMatrix(array)
