@@ -9,9 +9,9 @@ const (
 	CounterClockwiseFrom00
 	ClockwiseFrom0N
 	CounterClockwiseFrom0N
-
 	ClockwiseFromN0
 	CounterClockwiseFromN0
+
 	ClockwiseFromNN
 	CounterClockwiseFromNN
 )
@@ -39,6 +39,10 @@ func SpiralOrder(array [][]int, spiralArgument SpiralArgument) []int {
 
 	if spiralArgument.Direction == ClockwiseFromN0 {
 		return SpiralClockwixseFromN0(array)
+	}
+
+	if spiralArgument.Direction == CounterClockwiseFromN0 {
+		return SpiralCounterClockwiseFromN0(array)
 	}
 
 	return []int{}
@@ -181,6 +185,36 @@ func SpiralClockwixseFromN0(array [][]int) []int {
 		if right != left {
 			result = append(result, Walk(array, left, right, right, right)...)
 			result = append(result, Walk(array, right, right, right, left+1)...)
+		}
+
+		left++
+		right--
+
+		if left > right {
+			break
+		}
+	}
+
+	return result
+}
+
+func SpiralCounterClockwiseFromN0(array [][]int) []int {
+	left := 0
+	right := len(array) - 1
+	result := []int{}
+
+	for index := 0; index <= len(array)/2; index++ {
+		if left > 0 {
+			result = append(result, Walk(array, right, left-1, right, right)...)
+		} else {
+			result = append(result, Walk(array, right, left, right, right)...)
+		}
+
+		result = append(result, Walk(array, right, right, left, right)...)
+
+		if right != left {
+			result = append(result, Walk(array, left, right, left, left)...)
+			result = append(result, Walk(array, left, left, right-1, left)...)
 		}
 
 		left++
