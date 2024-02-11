@@ -5,29 +5,38 @@ import "log"
 type Direction int
 
 const (
-	Clockwise Direction = iota + 1
-	CounterClockwise
+	ClockwiseFrom00 Direction = iota + 1
+	CounterClockwiseFrom00
+	ClockwiseFrom0N
+
+	CounterClockwiseFrom0N
+	ClockwiseFromN0
+	CounterClockwiseFromN0
+	ClockwiseFromNN
+	CounterClockwiseFromNN
 )
 
 type SpiralArgument struct {
-	StartI    int
-	StartJ    int
 	Direction Direction
 }
 
 func SpiralOrder(array [][]int, spiralArgument SpiralArgument) []int {
-	if spiralArgument.Direction == Clockwise {
-		return SpiralClockwise(array)
+	if spiralArgument.Direction == ClockwiseFrom00 {
+		return SpiralClockwiseFrom00(array)
 	}
 
-	if spiralArgument.Direction == CounterClockwise {
-		return SpiralCounterClockwise(array)
+	if spiralArgument.Direction == CounterClockwiseFrom00 {
+		return SpiralCounterClockwiseFrom00(array)
+	}
+
+	if spiralArgument.Direction == ClockwiseFrom0N {
+		return SpiralClockwiseFrom0N(array)
 	}
 
 	return []int{}
 }
 
-func SpiralClockwise(array [][]int) []int {
+func SpiralClockwiseFrom00(array [][]int) []int {
 	left := 0
 	right := len(array) - 1
 	result := []int{}
@@ -57,7 +66,7 @@ func SpiralClockwise(array [][]int) []int {
 	return result
 }
 
-func SpiralCounterClockwise(array [][]int) []int {
+func SpiralCounterClockwiseFrom00(array [][]int) []int {
 	left := 0
 	right := len(array) - 1
 	result := []int{}
@@ -74,6 +83,36 @@ func SpiralCounterClockwise(array [][]int) []int {
 		if right != left {
 			result = append(result, Walk(array, right, right, left, right)...)
 			result = append(result, Walk(array, left, right, left, left+1)...)
+		}
+
+		left++
+		right--
+
+		if left > right {
+			break
+		}
+	}
+
+	return result
+}
+
+func SpiralClockwiseFrom0N(array [][]int) []int {
+	left := 0
+	right := len(array) - 1
+	result := []int{}
+
+	for index := 0; index <= len(array)/2; index++ {
+		if left > 0 {
+			result = append(result, Walk(array, left-1, right, right, right)...)
+		} else {
+			result = append(result, Walk(array, left, right, right, right)...)
+		}
+
+		result = append(result, Walk(array, right, right, right, left)...)
+
+		if right != left {
+			result = append(result, Walk(array, right, left, left, left)...)
+			result = append(result, Walk(array, left, left, left, right-1)...)
 		}
 
 		left++

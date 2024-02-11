@@ -17,9 +17,7 @@ func Test_case1(t *testing.T) {
 	}
 
 	spiralArgument := SpiralArgument{
-		StartI:    0,
-		StartJ:    0,
-		Direction: Clockwise,
+		Direction: ClockwiseFrom00,
 	}
 
 	expected := []int{
@@ -54,9 +52,7 @@ func Test_case2(t *testing.T) {
 	}
 
 	spiralArgument := SpiralArgument{
-		StartI:    0,
-		StartJ:    0,
-		Direction: Clockwise,
+		Direction: ClockwiseFrom00,
 	}
 
 	expected := []int{
@@ -246,9 +242,7 @@ func Test_case7(t *testing.T) {
 	}
 
 	spiralArgument := SpiralArgument{
-		StartI:    0,
-		StartJ:    0,
-		Direction: CounterClockwise,
+		Direction: CounterClockwiseFrom00,
 	}
 
 	expected := []int{
@@ -281,9 +275,7 @@ func Test_case8(t *testing.T) {
 	}
 
 	spiralArgument := SpiralArgument{
-		StartI:    0,
-		StartJ:    0,
-		Direction: CounterClockwise,
+		Direction: CounterClockwiseFrom00,
 	}
 
 	expected := []int{
@@ -357,3 +349,34 @@ right-- // 2
 // [3, 4] -> [3, 4]
 
 */
+
+func Test_case9(t *testing.T) {
+	// Create a 5x5 array of ints
+	arr := [][]int{
+		{1, 2, 3, 4, 5},
+		{6, 7, 8, 9, 10},
+		{11, 12, 13, 14, 15},
+		{16, 17, 18, 19, 20},
+		{21, 22, 23, 24, 25},
+	}
+
+	spiralArgument := SpiralArgument{
+		Direction: ClockwiseFrom0N,
+	}
+
+	expected := []int{
+		5, 10, 15, 20,
+		25, 24, 23, 22,
+		21, 16, 11, 6,
+		1, 2, 3,
+		4, 9, 14,
+		19, 18,
+		17, 12,
+		7,
+		8,
+		13,
+	}
+
+	actual := SpiralOrder(arr, spiralArgument)
+	assert.Equal(t, expected, actual)
+}
