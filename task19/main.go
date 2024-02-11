@@ -1,5 +1,7 @@
 package main
 
+import "log"
+
 type Direction int
 
 const (
@@ -14,6 +16,18 @@ type SpiralArgument struct {
 }
 
 func SpiralOrder(array [][]int, spiralArgument SpiralArgument) []int {
+	if spiralArgument.Direction == Clockwise {
+		return SpiralClockwise(array)
+	}
+
+	if spiralArgument.Direction == CounterClockwise {
+		return SpiralCounterClockwise(array)
+	}
+
+	return []int{}
+}
+
+func SpiralClockwise(array [][]int) []int {
 	left := 0
 	right := len(array) - 1
 	result := []int{}
@@ -43,7 +57,38 @@ func SpiralOrder(array [][]int, spiralArgument SpiralArgument) []int {
 	return result
 }
 
+func SpiralCounterClockwise(array [][]int) []int {
+	left := 0
+	right := len(array) - 1
+	result := []int{}
+
+	for index := 0; index <= len(array)/2; index++ {
+		if left > 0 {
+			result = append(result, Walk(array, left-1, left, right, left)...)
+		} else {
+			result = append(result, Walk(array, left, left, right, left)...)
+		}
+
+		result = append(result, Walk(array, right, left, right, right)...)
+
+		if right != left {
+			result = append(result, Walk(array, right, right, left, right)...)
+			result = append(result, Walk(array, left, right, left, left+1)...)
+		}
+
+		left++
+		right--
+
+		if left > right {
+			break
+		}
+	}
+
+	return result
+}
+
 func Walk(array [][]int, x1, y1, x2, y2 int) []int {
+	log.Printf("[%d, %d] -> [%d, %d]", x1, y1, x2, y2)
 	result := []int{}
 
 	if x1 == x2 && y1 < y2 {
