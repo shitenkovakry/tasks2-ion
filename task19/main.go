@@ -12,7 +12,6 @@ const (
 	ClockwiseFromN0
 	CounterClockwiseFromN0
 	ClockwiseFromNN
-
 	CounterClockwiseFromNN
 )
 
